@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -161,7 +161,11 @@ export default function Projects() {
           >
             <button
               onClick={closeModal}
-              className="absolute top-2 right-3 text-2xl font-bold text-black hover:text-gray-500 z-10"
+              className={`absolute top-5 right-4 text-2xl font-bold z-10 transition-colors ${
+                selected?.title === "«Love»"
+                  ? "text-black hover:text-gray-500"
+                  : "text-white hover:text-gray-300"
+              }`}
             >
               &times;
             </button>
