@@ -145,12 +145,16 @@ export default function Projects() {
     >
       {/* Контейнер для поддержания пропорций */}
       <div className="relative w-full pb-[140%] sm:pb-[160%] md:pb-[177.78%] bg-black rounded-2xl overflow-hidden">
-        <video
-          src={project.video}
-          muted
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
-        />
+      <video
+  src={project.video}
+  preload="metadata"
+  muted
+  playsInline
+  controls
+  poster="/img/placeholder.jpg" // сюда можно поставить любое изображение или отдельный постер для каждого
+  className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
+/>
+
       </div>
       <div className="text-sm text-white text-center mt-2">{project.title}</div>
     </div>
