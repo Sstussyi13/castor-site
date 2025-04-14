@@ -90,7 +90,7 @@ export default function Projects() {
           Наши проекты
         </h2>
 
-        {/* Горизонтальные видео — VK */}
+        {/* Горизонтальные видео */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {horizontalVideos.map((project, index) => (
             <div
@@ -121,44 +121,63 @@ export default function Projects() {
 
         {/* Вертикальные видео */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {verticalVideos.map((project, index) => (
-            <div
-              key={index}
-              className="group rounded-2xl overflow-hidden cursor-pointer"
-              data-aos="zoom-in"
-              data-aos-delay={index * 100}
-            >
-              <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
-                <video
-                  src={project.video}
-                  muted
-                  playsInline
-                  preload="metadata"
-                  controls
-                  className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl transform group-hover:scale-105 transition duration-300"
-                  onClick={(e) => {
-                    const video = e.currentTarget;
-                    activeVideoRef.current = video;
+          {verticalVideos.map((project, index) => {
+            const ref = useRef(null);
 
-                    if (typeof video.webkitEnterFullscreen === "function") {
-                      video.webkitEnterFullscreen();
-                      video.play();
-                    } else if (video.requestFullscreen) {
-                      video.requestFullscreen().then(() => video.play()).catch(() => {});
-                    }
-                  }}
-                  onLoadedMetadata={(e) => {
-                    const video = e.currentTarget;
-                    // Установить кадр для постера
-                    video.currentTime = 0.1;
-                  }}
-                />
+            useEffect(() => {
+              const video = ref.current;
+              if (!video) return;
+
+              const onLoaded = () => {
+                if (video.readyState > 0 && video.currentTime === 0) {
+                  video.currentTime = 0.1;
+                }
+              };
+
+              video.addEventListener("loadedmetadata", onLoaded);
+              return () => video.removeEventListener("loadedmetadata", onLoaded);
+            }, []);
+
+            return (
+              <div
+                key={index}
+                className="group rounded-2xl overflow-hidden cursor-pointer"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
+              >
+                <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
+                  <video
+                    ref={ref}
+                    src={project.video}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    controls
+                    className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl transform group-hover:scale-105 transition duration-300"
+                    onPlay={() => {
+                      document.querySelectorAll("video").forEach((v) => {
+                        if (v !== ref.current) v.pause();
+                      });
+                    }}
+                    onClick={(e) => {
+                      const video = e.currentTarget;
+                      activeVideoRef.current = video;
+
+                      if (typeof video.webkitEnterFullscreen === "function") {
+                        video.webkitEnterFullscreen();
+                        video.play();
+                      } else if (video.requestFullscreen) {
+                        video.requestFullscreen().then(() => video.play()).catch(() => {});
+                      }
+                    }}
+                  />
+                </div>
+                <p className="text-white text-left text-lg sm:text-xl font-semibold mt-2 pl-2 tracking-wide">
+                  {project.title}
+                </p>
               </div>
-              <p className="text-white text-left text-lg sm:text-xl font-semibold mt-2 pl-2 tracking-wide">
-                {project.title}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
