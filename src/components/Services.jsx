@@ -57,7 +57,7 @@ const horizontalVideos = [
     title: "«Серебрянный браслет»",
     img: "/img/Серебрянный браслет.png",
     video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239031&hd=2&hash=f0403ca1c22dab85&autoplay=1",
-  }
+  },
 ];
 
 const verticalVideos = [
@@ -129,10 +129,12 @@ export default function Projects() {
             </div>
           ))}
         </div>
+
+        {/* Разделитель */}
         <div className="my-16 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
         {/* Вертикальные видео */}
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {verticalVideos.map((project, index) => (
             <div
               key={index}
@@ -141,7 +143,7 @@ export default function Projects() {
               data-aos="zoom-in"
               data-aos-delay={index * 100}
             >
-              <div className="w-full aspect-[9/16] overflow-hidden">
+              <div className="w-full sm:aspect-[9/16] aspect-[9/18] max-h-[450px] sm:max-h-none overflow-hidden">
                 <video
                   src={project.video}
                   muted
@@ -155,6 +157,7 @@ export default function Projects() {
         </div>
       </div>
 
+      {/* Модалка */}
       {selected && (
         <div
           onClick={closeModal}
@@ -173,12 +176,14 @@ export default function Projects() {
               &times;
             </button>
 
-            {selected.video?.endsWith(".mp4") ? (
+            {selected.video?.endsWith(".mp4") || selected.video?.endsWith(".mov") ? (
               <video
                 src={selected.video}
                 controls
                 autoPlay
-                className="w-full aspect-[9/16] object-cover rounded-lg"
+                className={`w-full ${
+                  selected.title.includes("вертик") ? "aspect-[9/16]" : "aspect-video"
+                } object-cover rounded-lg`}
               />
             ) : (
               <iframe
@@ -200,3 +205,5 @@ export default function Projects() {
     </section>
   );
 }
+
+
