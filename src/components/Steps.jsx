@@ -17,98 +17,83 @@ export default function Steps() {
 
   const steps = [
     {
-      title: "1. Первичная консультация",
-      icon: <FaRegHandshake className="text-white text-3xl mb-2" />,
-      points: [
-        "Знакомство с клиентом и обсуждение идеи проекта.",
-        "Определение целей и задач съемки/производства.",
-        "Обсуждение бюджета и сроков.",
-      ],
+      title: "Консультация",
+      icon: <FaRegHandshake />,
+      description:
+        "Обсуждаем цели, идею проекта, бюджет и сроки. Формируем техническое задание.",
     },
     {
-      title: "2. Пре-продакшн",
-      icon: <FaPencilAlt className="text-white text-3xl mb-2" />,
-      points: [
-        "Разработка сценария и раскадровки.",
-        "Составление детальной сметы расходов.",
-        "Согласование всех деталей с клиентом.",
-        "Подбор актеров, съемочной группы и необходимых специалистов.",
-        "Выбор и бронирование локаций для съемок.",
-        "Организация логистической поддержки.",
-      ],
+      title: "Пре-продакшн",
+      icon: <FaPencilAlt />,
+      description:
+        "Пишем сценарий, подбираем команду, локации, готовим все к съёмке.",
     },
     {
-      title: "3. Продакшн",
-      icon: <FaVideo className="text-white text-3xl mb-2" />,
-      points: [
-        "Проведение съемочного процесса.",
-        "Контроль качества и соответствие сценарию.",
-        "Взаимодействие с клиентом на площадке.",
-      ],
+      title: "Продакшн",
+      icon: <FaVideo />,
+      description:
+        "Проводим съёмки по сценарию с контролем качества на каждом этапе.",
     },
     {
-      title: "4. Постпродакшн",
-      icon: <FaFilm className="text-white text-3xl mb-2" />,
-      points: [
-        "Монтаж отснятого материала.",
-        "Добавление спецэффектов и цветокорекции.",
-        "Работа над звуком и озвучкой.",
-        "Цветокоррекция и финальная обработка.",
-      ],
+      title: "Постпродакшн",
+      icon: <FaFilm />,
+      description:
+        "Монтаж, цветокоррекция, звук, эффекты. Формируем финальный вариант.",
     },
     {
-      title: "5. Утверждение и сдача проекта",
-      icon: <FaCheckCircle className="text-white text-3xl mb-2" />,
-      points: [
-        "Демонстрация готового продукта клиенту.",
-        "Внесение правок и доработок по запросу клиента.",
-        "Финальная сдача проекта и передача всех материалов.",
-      ],
+      title: "Сдача проекта",
+      icon: <FaCheckCircle />,
+      description:
+        "Презентация результата клиенту. Внесение правок и передача материала.",
     },
     {
-      title: "6. Продвижение и поддержка",
-      icon: <FaBullhorn className="text-white text-3xl mb-2" />,
-      points: [
-        "Помощь в продвижении готового фильма/ролика.",
-        "Консультации по дальнейшему использованию материала.",
-        "Поддержка после завершения проекта.",
-      ],
+      title: "Продвижение",
+      icon: <FaBullhorn />,
+      description:
+        "Помогаем с публикацией и распространением. Даём рекомендации по продвижению.",
     },
   ];
 
   return (
-    <section className="bg-black text-white py-24 px-6">
+    <section className="bg-black text-white py-24 px-4 sm:px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <h2
-          className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16"
-          data-aos="fade-up"
-        >
-          Этапы работы с клиентами
+        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-20" data-aos="fade-up">
+          Этапы нашей работы
         </h2>
 
-        <div className="grid gap-12">
-          {steps.map((step, index) => (
-            <div
-              key={index}
-              className="relative bg-white bg-opacity-5 p-6 rounded-lg shadow-lg backdrop-blur-md overflow-hidden"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-            >
-              {/* Красный светящийся шар за карточкой */}
-              <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-red-500 blur-xl opacity-70 z-0" />
+        {/* Вертикальная линия по центру */}
+        
+        <div className="absolute left-1/2 top-[180px] bottom-[120px] w-[2px] bg-gradient-to-b from-pink-500 via-red-500 to-purple-500 opacity-50 blur-[1px] bg-[length:2px_400%] bg-[0_0] animate-gradient-flow z-0 hidden sm:block" />
 
-              <div className="flex items-center gap-4 mb-3 relative z-10">
-                {step.icon}
-                <h3 className="text-xl font-bold text-white">{step.title}</h3>
+
+
+        <div className="flex flex-col gap-20 relative z-10">
+          {steps.map((step, index) => {
+            const isLeft = index % 2 === 0;
+            const fade = isLeft ? "fade-right" : "fade-left";
+            return (
+              <div
+                key={index}
+                className={`flex flex-col sm:flex-row items-center ${
+                  isLeft ? "sm:justify-start" : "sm:justify-end"
+                }`}
+                data-aos={fade}
+                data-aos-delay={index * 150}
+              >
+                <div
+  className={`w-full sm:w-[46%] bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 shadow-xl relative transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:border-pink-500/30 ${
+    isLeft ? "sm:mr-auto" : "sm:ml-auto"
+  }`}
+                >
+                  <div className="flex items-center gap-4 mb-4 text-red-400 text-2xl">
+                    <div className="p-4 bg-white/10 rounded-full">{step.icon}</div>
+                    <h3 className="text-xl font-bold text-white">{step.title}</h3>
+                  </div>
+                  <p className="text-sm text-gray-300">{step.description}</p>
+                </div>
               </div>
-
-              <ul className="list-disc list-inside text-gray-300 space-y-1 relative z-10">
-                {step.points.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
