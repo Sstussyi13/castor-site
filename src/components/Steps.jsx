@@ -19,81 +19,70 @@ export default function Steps() {
     {
       title: "Консультация",
       icon: <FaRegHandshake />,
-      description:
-        "Обсуждаем цели, идею проекта, бюджет и сроки. Формируем техническое задание.",
+      description: "Обсуждаем цели проекта, идеи, бюджет и сроки.",
     },
     {
       title: "Пре-продакшн",
       icon: <FaPencilAlt />,
-      description:
-        "Пишем сценарий, подбираем команду, локации, готовим все к съёмке.",
+      description: "Сценарий, подбор команды и локаций, подготовка к съёмке.",
     },
     {
       title: "Продакшн",
       icon: <FaVideo />,
-      description:
-        "Проводим съёмки по сценарию с контролем качества на каждом этапе.",
+      description: "Съёмочный процесс, контроль исполнения и креатив на площадке.",
     },
     {
       title: "Постпродакшн",
       icon: <FaFilm />,
-      description:
-        "Монтаж, цветокоррекция, звук, эффекты. Формируем финальный вариант.",
+      description: "Монтаж, звук, цвет, эффекты. Создание финального продукта.",
     },
     {
       title: "Сдача проекта",
       icon: <FaCheckCircle />,
-      description:
-        "Презентация результата клиенту. Внесение правок и передача материала.",
+      description: "Презентация, финальные правки и передача материалов.",
     },
     {
       title: "Продвижение",
       icon: <FaBullhorn />,
-      description:
-        "Помогаем с публикацией и распространением. Даём рекомендации по продвижению.",
+      description: "Помощь с публикацией, рекомендации и поддержка.",
     },
   ];
 
   return (
-    <section className="bg-black text-white py-24 px-4 sm:px-6 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-20" data-aos="fade-up">
+    <section className="relative bg-black text-white py-28 px-6 overflow-hidden">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2
+          className="text-4xl sm:text-5xl font-bold mb-16 z-10 relative"
+          data-aos="fade-up"
+        >
           Этапы нашей работы
         </h2>
 
-        {/* Вертикальная линия по центру */}
-        
-        <div className="absolute left-1/2 top-[180px] bottom-[120px] w-[2px] bg-gradient-to-b from-pink-500 via-red-500 to-purple-500 opacity-50 blur-[1px] bg-[length:2px_400%] bg-[0_0] animate-gradient-flow z-0 hidden sm:block" />
+        {/* Светящийся круг в фоне */}
+        <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-br from-pink-500 via-red-500 to-purple-600 opacity-20 blur-[180px] rounded-full z-0" />
 
+        {/* Сетка карточек */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="group bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.04] hover:shadow-pink-500/20 hover:border-pink-500/30 hover:bg-white/10"
 
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div className="flex items-center gap-4 text-pink-400 mb-4">
+              <div className="text-3xl bg-white/10 p-3 rounded-full transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
+  {step.icon}
+</div>
 
-        <div className="flex flex-col gap-20 relative z-10">
-          {steps.map((step, index) => {
-            const isLeft = index % 2 === 0;
-            const fade = isLeft ? "fade-right" : "fade-left";
-            return (
-              <div
-                key={index}
-                className={`flex flex-col sm:flex-row items-center ${
-                  isLeft ? "sm:justify-start" : "sm:justify-end"
-                }`}
-                data-aos={fade}
-                data-aos-delay={index * 150}
-              >
-                <div
-  className={`w-full sm:w-[46%] bg-white/5 border border-white/10 backdrop-blur-md rounded-xl p-6 shadow-xl relative transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:border-pink-500/30 ${
-    isLeft ? "sm:mr-auto" : "sm:ml-auto"
-  }`}
-                >
-                  <div className="flex items-center gap-4 mb-4 text-red-400 text-2xl">
-                    <div className="p-4 bg-white/10 rounded-full">{step.icon}</div>
-                    <h3 className="text-xl font-bold text-white">{step.title}</h3>
-                  </div>
-                  <p className="text-sm text-gray-300">{step.description}</p>
-                </div>
+                <h3 className="text-xl font-bold text-white">{step.title}</h3>
               </div>
-            );
-          })}
+              <p className="text-sm text-gray-300 leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -22,7 +22,7 @@ export default function About() {
 
       <div className="flex flex-col md:flex-row md:justify-center gap-8 md:gap-10 max-w-6xl mx-auto mt-6 sm:mt-10 px-2 sm:px-0">
         <div
-          className="flex-1 border-l-4 border-red-600 pl-4 sm:pl-6 hover:scale-[1.02] transition-transform duration-300"
+          className="flex-1 border-l-4 border-red-500 pl-4 sm:pl-6 hover:scale-[1.02] transition-transform duration-300"
           data-aos="fade-up"
           data-aos-delay="400"
         >
@@ -32,7 +32,7 @@ export default function About() {
           </p>
         </div>
         <div
-          className="flex-1 border-l-4 border-red-600 pl-4 sm:pl-6 hover:scale-[1.02] transition-transform duration-300"
+          className="flex-1 border-l-4 border-red-500 pl-4 sm:pl-6 hover:scale-[1.02] transition-transform duration-300"
           data-aos="fade-up"
           data-aos-delay="600"
         >
@@ -42,7 +42,7 @@ export default function About() {
           </p>
         </div>
         <div
-          className="flex-1 border-l-4 border-red-600 pl-4 sm:pl-6 hover:scale-[1.02] transition-transform duration-300"
+          className="flex-1 border-l-4 border-red-500 pl-4 sm:pl-6 hover:scale-[1.02] transition-transform duration-300"
           data-aos="fade-up"
           data-aos-delay="800"
         >

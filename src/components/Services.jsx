@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -126,7 +127,8 @@ export default function Projects() {
               <div className="relative w-full pb-[56.25%] bg-black rounded-xl overflow-hidden">
                 <iframe
                   src={project.video}
-                  allow="autoplay; encrypted-media"
+
+allow="autoplay; encrypted-media"
                   allowFullScreen
                   className="absolute top-0 left-0 w-full h-full rounded-xl"
                   frameBorder="0"
@@ -143,45 +145,35 @@ export default function Projects() {
         {/* Разделитель */}
         <div className="my-16 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-       {/* Вертикальные видео */} 
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-  {verticalVideos.map((project, index) => (
-    <div
-      key={index}
-      className="group rounded-2xl overflow-hidden cursor-pointer"
-      data-aos="zoom-in"
-      data-aos-delay={index * 100}
-    >
-      <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
-        <video
-          src={project.video}
-          muted
-          playsInline
-          preload="metadata"
-          className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
-          onClick={(e) => {
-            const video = e.currentTarget;
-
-            // На телефоне — открыть в полный экран
-            if (video.requestFullscreen) {
-              video.requestFullscreen();
-            } else if (video.webkitRequestFullscreen) {
-              video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) {
-              video.msRequestFullscreen();
-            }
-
-            video.play();
-          }}
-        />
-      </div>
-      <p className="text-white text-left text-lg sm:text-xl font-semibold mt-2 pl-2 tracking-wide">
-        {project.title}
-      </p>
-    </div>
-  ))}
-</div>
-
+        {/* Вертикальные видео */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {verticalVideos.map((project, index) => {
+            const ref = useRef(null);
+            return (
+              <div
+                key={index}
+                onClick={() => handleFullscreen(ref, index)}
+                className="group rounded-2xl overflow-hidden cursor-pointer"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
+              >
+                <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
+                  <video
+                    ref={ref}
+                    src={project.video}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
+                  />
+                </div>
+                <p className="text-white text-left text-lg sm:text-xl font-semibold mt-2 pl-2 tracking-wide">
+                  {project.title}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
