@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 const horizontalVideos = [
   { title: "«Дело-процесс»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239018&hd=2&hash=ec992e43d860a367" },
@@ -27,13 +25,6 @@ export default function Projects() {
   const activeVideoRef = useRef(null);
 
   useEffect(() => {
-    AOS.init({
-      once: true,
-      duration: 400,
-      easing: "ease-in-out",
-      disable: window.innerWidth < 768,
-    });
-
     const handleExitFullscreen = () => {
       const video = activeVideoRef.current;
       if (
@@ -58,18 +49,19 @@ export default function Projects() {
   return (
     <section id="projects" className="bg-[#0f0f0f] text-white py-20 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-12" data-aos="fade-up">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-12">
           Наши проекты
         </h2>
 
-        {/* Горизонтальные видео */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-up">
+        {/* Горизонтальные видео */} 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {horizontalVideos.map((project, index) => (
             <div key={index} className="rounded-xl overflow-hidden">
               <div className="relative w-full pb-[56.25%] bg-black rounded-xl overflow-hidden">
                 <iframe
                   src={project.video}
                   allow="autoplay; encrypted-media"
+                  loading="lazy"
                   allowFullScreen
                   className="absolute top-0 left-0 w-full h-full rounded-xl"
                   frameBorder="0"
@@ -113,14 +105,7 @@ export default function Projects() {
                     src={project.video}
                     muted
                     playsInline
-                    preload="metadata"
-                    controls
-                    className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl transform transition duration-300 group-hover:scale-105"
-                    onPlay={() => {
-                      document.querySelectorAll("video").forEach((v) => {
-                        if (v !== ref.current) v.pause();
-                      });
-                    }}
+                    className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl transition duration-300"
                     onClick={(e) => {
                       const video = e.currentTarget;
                       activeVideoRef.current = video;
@@ -131,6 +116,11 @@ export default function Projects() {
                       } else if (video.requestFullscreen) {
                         video.requestFullscreen().then(() => video.play()).catch(() => {});
                       }
+                    }}
+                    onPlay={() => {
+                      document.querySelectorAll("video").forEach((v) => {
+                        if (v !== ref.current) v.pause();
+                      });
                     }}
                   />
                 </div>
