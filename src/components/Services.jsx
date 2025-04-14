@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -51,62 +50,38 @@ const horizontalVideos = [
 ];
 
 const verticalVideos = [
-  {
-    title: "«Love»",
-    video: "/videos/love.mp4",
-  },
-  {
-    title: "«Как повлияло творчество»",
-    video: "/videos/Как повлияло творчество .mp4",
-  },
-  {
-    title: "«Что для тебя ночь?»",
-    video: "/videos/Что для тебя ночь _ .mp4",
-  },
-  {
-    title: "«Что ты чувствуешь когда творишь»",
-    video: "/videos/Что ты чувствуешь когда творишь _ .mp4",
-  },
+  { title: "«Love»", video: "/videos/love.mp4" },
+  { title: "«Как повлияло творчество»", video: "/videos/Как повлияло творчество .mp4" },
+  { title: "«Что для тебя ночь?»", video: "/videos/Что для тебя ночь _ .mp4" },
+  { title: "«Что ты чувствуешь когда творишь»", video: "/videos/Что ты чувствуешь когда творишь _ .mp4" },
 ];
 
 export default function Projects() {
-  const videoRefs = useRef([]);
+  const activeVideoRef = useRef(null);
 
   useEffect(() => {
     AOS.init({ once: true, duration: 700 });
 
-    const handleFullscreenChange = () => {
-      videoRefs.current.forEach((video) => {
-        if (
-          video &&
-          !document.fullscreenElement &&
-          !document.webkitFullscreenElement &&
-          !document.msFullscreenElement
-        ) {
-          video.pause();
-        }
-      });
+    const handleExitFullscreen = () => {
+      const video = activeVideoRef.current;
+      if (
+        video &&
+        !document.fullscreenElement &&
+        !document.webkitFullscreenElement &&
+        !document.msFullscreenElement
+      ) {
+        video.pause();
+      }
     };
 
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleExitFullscreen);
+    document.addEventListener("webkitfullscreenchange", handleExitFullscreen);
 
     return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("fullscreenchange", handleExitFullscreen);
+      document.removeEventListener("webkitfullscreenchange", handleExitFullscreen);
     };
   }, []);
-
-  const handleFullscreen = (ref, index) => {
-    const video = ref.current;
-    if (video) {
-      if (video.requestFullscreen) video.requestFullscreen();
-      else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
-      else if (video.msRequestFullscreen) video.msRequestFullscreen();
-      video.play();
-      videoRefs.current[index] = video;
-    }
-  };
 
   return (
     <section id="projects" className="bg-[#0f0f0f] text-white py-20 px-4 sm:px-6">
@@ -115,7 +90,7 @@ export default function Projects() {
           Наши проекты
         </h2>
 
-        {/* Горизонтальные видео — VK Video, без фона */}
+        {/* Горизонтальные видео — VK */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {horizontalVideos.map((project, index) => (
             <div
@@ -127,8 +102,7 @@ export default function Projects() {
               <div className="relative w-full pb-[56.25%] bg-black rounded-xl overflow-hidden">
                 <iframe
                   src={project.video}
-
-allow="autoplay; encrypted-media"
+                  allow="autoplay; encrypted-media"
                   allowFullScreen
                   className="absolute top-0 left-0 w-full h-full rounded-xl"
                   frameBorder="0"
@@ -147,32 +121,44 @@ allow="autoplay; encrypted-media"
 
         {/* Вертикальные видео */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {verticalVideos.map((project, index) => {
-            const ref = useRef(null);
-            return (
-              <div
-                key={index}
-                onClick={() => handleFullscreen(ref, index)}
-                className="group rounded-2xl overflow-hidden cursor-pointer"
-                data-aos="zoom-in"
-                data-aos-delay={index * 100}
-              >
-                <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
-                  <video
-                    ref={ref}
-                    src={project.video}
-                    muted
-                    playsInline
-                    preload="metadata"
-                    className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
-                  />
-                </div>
-                <p className="text-white text-left text-lg sm:text-xl font-semibold mt-2 pl-2 tracking-wide">
-                  {project.title}
-                </p>
+          {verticalVideos.map((project, index) => (
+            <div
+              key={index}
+              className="group rounded-2xl overflow-hidden cursor-pointer"
+              data-aos="zoom-in"
+              data-aos-delay={index * 100}
+            >
+              <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
+                <video
+                  src={project.video}
+                  muted
+                  playsInline
+                  preload="metadata"
+                  controls
+                  className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl transform group-hover:scale-105 transition duration-300"
+                  onClick={(e) => {
+                    const video = e.currentTarget;
+                    activeVideoRef.current = video;
+
+                    if (typeof video.webkitEnterFullscreen === "function") {
+                      video.webkitEnterFullscreen();
+                      video.play();
+                    } else if (video.requestFullscreen) {
+                      video.requestFullscreen().then(() => video.play()).catch(() => {});
+                    }
+                  }}
+                  onLoadedMetadata={(e) => {
+                    const video = e.currentTarget;
+                    // Установить кадр для постера
+                    video.currentTime = 0.1;
+                  }}
+                />
               </div>
-            );
-          })}
+              <p className="text-white text-left text-lg sm:text-xl font-semibold mt-2 pl-2 tracking-wide">
+                {project.title}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

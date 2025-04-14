@@ -71,7 +71,7 @@ export default function Steps() {
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <div className="flex items-center gap-4 text-pink-400 mb-4">
+              <div className="flex items-center gap-4 text-red-400 mb-4">
               <div className="text-3xl bg-white/10 p-3 rounded-full transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
   {step.icon}
 </div>
