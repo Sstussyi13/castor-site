@@ -3,50 +3,17 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const horizontalVideos = [
-  {
-    title: "«Дело-процесс»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239018&hd=2&hash=ec992e43d860a367",
-  },
-  {
-    title: "«Не упомянутый»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239019&hd=2&hash=07937d4794a83bac",
-  },
-  {
-    title: "«Ода для одного»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239020&hd=2&hash=ee60db40bcd025c8",
-  },
-  {
-    title: "«Творческая съемка»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239021&hd=2&hash=83250a45b046b6ec",
-  },
-  {
-    title: "«Выбор»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239024&hd=2&hash=fdee7aafa3b332b5",
-  },
-  {
-    title: "«Реклама платья»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239025&hd=2&hash=43ed61f0d09f8260",
-  },
-  {
-    title: "«Съёмки рекламы»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239026&hd=2&hash=5db6668c15ba1a68",
-  },
-  {
-    title: "«Съёмки рекламы 2»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239027&hd=2&hash=b469360785f25e20",
-  },
-  {
-    title: "«Реклама кондитерской»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239028&hd=2&hash=24069785006b3776",
-  },
-  {
-    title: "«Ютюбная работа»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239030&hd=2&hash=1f9cedc0e9c796c5",
-  },
-  {
-    title: "«Серебрянный браслет»",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239031&hd=2&hash=f0403ca1c22dab85",
-  },
+  { title: "«Дело-процесс»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239018&hd=2&hash=ec992e43d860a367" },
+  { title: "«Не упомянутый»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239019&hd=2&hash=07937d4794a83bac" },
+  { title: "«Ода для одного»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239020&hd=2&hash=ee60db40bcd025c8" },
+  { title: "«Творческая съемка»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239021&hd=2&hash=83250a45b046b6ec" },
+  { title: "«Выбор»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239024&hd=2&hash=fdee7aafa3b332b5" },
+  { title: "«Реклама платья»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239025&hd=2&hash=43ed61f0d09f8260" },
+  { title: "«Съёмки рекламы»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239026&hd=2&hash=5db6668c15ba1a68" },
+  { title: "«Съёмки рекламы 2»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239027&hd=2&hash=b469360785f25e20" },
+  { title: "«Реклама кондитерской»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239028&hd=2&hash=24069785006b3776" },
+  { title: "«Ютюбная работа»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239030&hd=2&hash=1f9cedc0e9c796c5" },
+  { title: "«Серебрянный браслет»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239031&hd=2&hash=f0403ca1c22dab85" },
 ];
 
 const verticalVideos = [
@@ -60,7 +27,12 @@ export default function Projects() {
   const activeVideoRef = useRef(null);
 
   useEffect(() => {
-    AOS.init({ once: true, duration: 700 });
+    AOS.init({
+      once: true,
+      duration: 400,
+      easing: "ease-in-out",
+      disable: window.innerWidth < 768,
+    });
 
     const handleExitFullscreen = () => {
       const video = activeVideoRef.current;
@@ -91,14 +63,9 @@ export default function Projects() {
         </h2>
 
         {/* Горизонтальные видео */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-up">
           {horizontalVideos.map((project, index) => (
-            <div
-              key={index}
-              className="rounded-xl overflow-hidden"
-              data-aos="zoom-in"
-              data-aos-delay={index * 100}
-            >
+            <div key={index} className="rounded-xl overflow-hidden">
               <div className="relative w-full pb-[56.25%] bg-black rounded-xl overflow-hidden">
                 <iframe
                   src={project.video}
@@ -139,12 +106,7 @@ export default function Projects() {
             }, []);
 
             return (
-              <div
-                key={index}
-                className="group rounded-2xl overflow-hidden cursor-pointer"
-                data-aos="zoom-in"
-                data-aos-delay={index * 100}
-              >
+              <div key={index} className="rounded-2xl overflow-hidden cursor-pointer">
                 <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
                   <video
                     ref={ref}
@@ -153,7 +115,7 @@ export default function Projects() {
                     playsInline
                     preload="metadata"
                     controls
-                    className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl transform group-hover:scale-105 transition duration-300"
+                    className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl transform transition duration-300 group-hover:scale-105"
                     onPlay={() => {
                       document.querySelectorAll("video").forEach((v) => {
                         if (v !== ref.current) v.pause();
