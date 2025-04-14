@@ -63,19 +63,19 @@ const horizontalVideos = [
 const verticalVideos = [
   {
     title: "«Love»",
-    video: "/videos/love.mov",
+    video: "/videos/love.mp4",
   },
   {
     title: "«Как повлияло творчество»",
-    video: "/videos/Как повлияло творчество .mov",
+    video: "/videos/Как повлияло творчество .mp4",
   },
   {
     title: "«Что для тебя ночь?»",
-    video: "/videos/Что для тебя ночь _ .mov",
+    video: "/videos/Что для тебя ночь _ .mp4",
   },
   {
     title: "«Что ты чувствуешь когда творишь»",
-    video: "/videos/Что ты чувствуешь когда творишь _ .mov",
+    video: "/videos/Что ты чувствуешь когда творишь _ .mp4",
   },
 ];
 
@@ -133,28 +133,31 @@ export default function Projects() {
         {/* Разделитель */}
         <div className="my-16 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-        {/* Вертикальные видео */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {verticalVideos.map((project, index) => (
-            <div
-              key={index}
-              onClick={() => setSelected(project)}
-              className="group rounded-2xl overflow-hidden cursor-pointer"
-              data-aos="zoom-in"
-              data-aos-delay={index * 100}
-            >
-              <div className="w-full sm:aspect-[9/16] aspect-[9/18] max-h-[450px] sm:max-h-none overflow-hidden">
-                <video
-                  src={project.video}
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
-                />
-              </div>
-              <div className="text-sm text-white text-center mt-2">{project.title}</div>
-            </div>
-          ))}
-        </div>
+       {/* Вертикальные видео */}
+       <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+  {verticalVideos.map((project, index) => (
+    <div
+      key={index}
+      onClick={() => setSelected(project)}
+      className="group rounded-2xl overflow-hidden cursor-pointer"
+      data-aos="zoom-in"
+      data-aos-delay={index * 100}
+    >
+      {/* Контейнер для поддержания пропорций */}
+      <div className="relative w-full pb-[140%] sm:pb-[160%] md:pb-[177.78%] bg-black rounded-2xl overflow-hidden">
+        <video
+          src={project.video}
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
+        />
+      </div>
+      <div className="text-sm text-white text-center mt-2">{project.title}</div>
+    </div>
+  ))}
+</div>
+
+
       </div>
 
       {/* Модалка */}
