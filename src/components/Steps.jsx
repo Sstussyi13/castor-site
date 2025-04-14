@@ -12,7 +12,12 @@ import {
 
 export default function Steps() {
   useEffect(() => {
-    AOS.init({ once: true, duration: 700 });
+    AOS.init({
+      once: true,
+      duration: 500,
+      easing: "ease-in-out",
+      disable: window.innerWidth < 768,
+    });
   }, []);
 
   const steps = [
@@ -59,23 +64,21 @@ export default function Steps() {
         </h2>
 
         {/* Светящийся круг в фоне */}
-        <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-br from-pink-500 via-red-500 to-purple-600 opacity-20 blur-[180px] rounded-full z-0" />
+        <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gradient-to-br from-pink-500 via-red-500 to-purple-600 opacity-10 blur-[160px] rounded-full z-0" />
 
         {/* Сетка карточек */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {steps.map((step, index) => (
             <div
               key={index}
-              className="group bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.04] hover:shadow-pink-500/20 hover:border-pink-500/30 hover:bg-white/10"
-
+              className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-md transition-all duration-300"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
               <div className="flex items-center gap-4 text-red-400 mb-4">
-              <div className="text-3xl bg-white/10 p-3 rounded-full transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
-  {step.icon}
-</div>
-
+                <div className="text-3xl bg-white/10 p-3 rounded-full">
+                  {step.icon}
+                </div>
                 <h3 className="text-xl font-bold text-white">{step.title}</h3>
               </div>
               <p className="text-sm text-gray-300 leading-relaxed">
