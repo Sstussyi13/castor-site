@@ -2,18 +2,17 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden font-sans text-white">
-      {/* Фон */}
-      <img
-        src="/img/bg.JPG"
-        alt="Фон"
-        className="absolute top-0 left-0 w-full h-full object-cover brightness-[0.4]"
-      />
+    <section className="relative min-h-[100dvh] w-full font-sans text-white">
+      {/* Фон через backgroundImage — производительнее */}
+      <div
+        className="absolute inset-0 bg-cover bg-center brightness-[0.4]"
+        style={{ backgroundImage: 'url(/img/bg.JPG)' }}
+      ></div>
 
       {/* Контент поверх */}
-      <div className="relative z-20 h-full flex flex-col justify-between">
+      <div className="relative z-20 min-h-[100dvh] flex flex-col justify-between">
         {/* Шапка */}
-        <header className="flex justify-between items-center px-4 sm:px-8 py-4 sm:py-6 bg-white bg-opacity-100 backdrop-blur-sm text-black shadow-md">
+        <header className="flex justify-between items-center px-4 sm:px-8 py-4 sm:py-6 bg-white/90 text-black shadow-sm">
           <img
             src="/img/logo.svg"
             alt="Castor Logo"
@@ -63,7 +62,7 @@ export default function Hero() {
       </div>
 
       {/* Градиент снизу */}
-      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0f0f0f] to-transparent z-10 translate-y-4" />
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0f0f0f] to-transparent z-10 translate-y-4 pointer-events-none" />
     </section>
   );
 }
