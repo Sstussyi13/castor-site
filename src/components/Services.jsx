@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -6,77 +6,65 @@ const horizontalVideos = [
   {
     title: "«Дело-процесс»",
     img: "/img/Дело-процесс.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239018&hd=2&hash=ec992e43d860a367&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239018&hd=2&hash=ec992e43d860a367",
   },
   {
     title: "«Не упомянутый»",
     img: "/img/Не упомянутый.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239019&hd=2&hash=07937d4794a83bac&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239019&hd=2&hash=07937d4794a83bac",
   },
   {
     title: "«Ода для одного»",
     img: "/img/Ода для одного.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239020&hd=2&hash=ee60db40bcd025c8&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239020&hd=2&hash=ee60db40bcd025c8",
   },
   {
     title: "«Творческая съемка»",
     img: "/img/Творческая съемка.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239021&hd=2&hash=83250a45b046b6ec&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239021&hd=2&hash=83250a45b046b6ec",
   },
   {
     title: "«Выбор»",
     img: "/img/Выбор.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239024&hd=2&hash=fdee7aafa3b332b5&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239024&hd=2&hash=fdee7aafa3b332b5",
   },
   {
     title: "«Реклама платья»",
     img: "/img/Реклама платья.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239025&hd=2&hash=43ed61f0d09f8260&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239025&hd=2&hash=43ed61f0d09f8260",
   },
   {
     title: "«Съёмки рекламы»",
     img: "/img/Съёмки рекламы.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239026&hd=2&hash=5db6668c15ba1a68&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239026&hd=2&hash=5db6668c15ba1a68",
   },
   {
     title: "«Съёмки рекламы 2»",
     img: "/img/Съёмки рекламы 2.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239027&hd=2&hash=b469360785f25e20&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239027&hd=2&hash=b469360785f25e20",
   },
   {
     title: "«Реклама кондитерской»",
     img: "/img/Реклама кондитерской.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239028&hd=2&hash=24069785006b3776&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239028&hd=2&hash=24069785006b3776",
   },
   {
     title: "«Ютюбная работа»",
     img: "/img/Ютюбная работа.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239030&hd=2&hash=1f9cedc0e9c796c5&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239030&hd=2&hash=1f9cedc0e9c796c5",
   },
   {
     title: "«Серебрянный браслет»",
     img: "/img/Серебрянный браслет.png",
-    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239031&hd=2&hash=f0403ca1c22dab85&autoplay=1",
+    video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239031&hd=2&hash=f0403ca1c22dab85",
   },
 ];
 
 const verticalVideos = [
-  {
-    title: "«Love»",
-    video: "/videos/love.mp4",
-  },
-  {
-    title: "«Как повлияло творчество»",
-    video: "/videos/Как повлияло творчество .mp4",
-  },
-  {
-    title: "«Что для тебя ночь?»",
-    video: "/videos/Что для тебя ночь _ .mp4",
-  },
-  {
-    title: "«Что ты чувствуешь когда творишь»",
-    video: "/videos/Что ты чувствуешь когда творишь _ .mp4",
-  },
+  { title: "«Love»", video: "/videos/love.mp4" },
+  { title: "«Как повлияло творчество»", video: "/videos/Как повлияло творчество .mp4" },
+  { title: "«Что для тебя ночь?»", video: "/videos/Что для тебя ночь _ .mp4" },
+  { title: "«Что ты чувствуешь когда творишь»", video: "/videos/Что ты чувствуешь когда творишь _ .mp4" },
 ];
 
 export default function Projects() {
@@ -135,51 +123,27 @@ export default function Projects() {
 
         {/* Вертикальные видео */}
         <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {verticalVideos.map((project, index) => {
-            const videoRef = useRef(null);
-
-            const handleClick = () => {
-              const isMobile = window.innerWidth < 768;
-
-              if (isMobile) {
-                const video = videoRef.current;
-                if (video) {
-                  if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                  } else if (video.webkitRequestFullscreen) {
-                    video.webkitRequestFullscreen();
-                  } else if (video.msRequestFullscreen) {
-                    video.msRequestFullscreen();
-                  }
-                  video.play();
-                }
-              } else {
-                setSelected(project); // десктоп — открываем модалку
-              }
-            };
-
-            return (
-              <div
-                key={index}
-                onClick={handleClick}
-                className="group rounded-2xl overflow-hidden cursor-pointer"
-                data-aos="zoom-in"
-                data-aos-delay={index * 100}
-              >
-                <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
-                  <video
-                    ref={videoRef}
-                    src={project.video}
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
-                  />
-                </div>
-                <div className="text-sm text-white text-center mt-2">{project.title}</div>
+          {verticalVideos.map((project, index) => (
+            <div
+              key={index}
+              onClick={() => setSelected(project)}
+              className="group rounded-2xl overflow-hidden cursor-pointer"
+              data-aos="zoom-in"
+              data-aos-delay={index * 100}
+            >
+              <div className="relative w-full pb-[140%] sm:pb-[160%] md:pb-[177.78%] bg-black rounded-2xl overflow-hidden">
+                <video
+                  src={project.video}
+                  preload="metadata"
+                  muted
+                  playsInline
+                  controls={false}
+                  className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
+                />
               </div>
-            );
-          })}
+              <div className="text-sm text-white text-center mt-2">{project.title}</div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -206,7 +170,6 @@ export default function Projects() {
               <video
                 src={selected.video}
                 controls
-                autoPlay
                 className="w-full aspect-[9/16] object-cover rounded-lg"
               />
             ) : (
@@ -229,5 +192,6 @@ export default function Projects() {
     </section>
   );
 }
+
 
 
