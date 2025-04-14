@@ -11,15 +11,8 @@ import {
 } from "react-icons/fa";
 
 export default function Steps() {
-  const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
-
   useEffect(() => {
-    AOS.init({
-      once: true,
-      duration: 600,
-      easing: "ease-in-out",
-      disable: () => window.innerWidth < 768, // отключение на телефонах
-    });
+    AOS.init({ once: true, duration: 700 });
   }, []);
 
   const steps = [
@@ -60,27 +53,29 @@ export default function Steps() {
       <div className="max-w-6xl mx-auto text-center">
         <h2
           className="text-4xl sm:text-5xl font-bold mb-16 z-10 relative"
-          data-aos={isDesktop ? "fade-up" : ""}
+          data-aos="fade-up"
         >
           Этапы нашей работы
         </h2>
 
         {/* Светящийся круг в фоне */}
-        <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gradient-to-br from-pink-500 via-red-500 to-purple-600 opacity-10 blur-[160px] rounded-full z-0" />
+        <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-br from-pink-500 via-red-500 to-purple-600 opacity-20 blur-[180px] rounded-full z-0" />
 
         {/* Сетка карточек */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {steps.map((step, index) => (
             <div
               key={index}
-              className="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-md transition-all duration-300"
-              data-aos={isDesktop ? "fade-up" : ""}
-              data-aos-delay={isDesktop ? index * 100 : 0}
+              className="group bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-xl transition-all duration-300 ease-in-out hover:scale-[1.04] hover:shadow-pink-500/20 hover:border-pink-500/30 hover:bg-white/10"
+
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
-              <div className="flex items-center gap-4 text-white mb-4">
-                <div className="text-3xl bg-white/10 p-3 rounded-full">
-                  {step.icon}
-                </div>
+              <div className="flex items-center gap-4 text-red-400 mb-4">
+              <div className="text-3xl bg-white/10 p-3 rounded-full transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
+  {step.icon}
+</div>
+
                 <h3 className="text-xl font-bold text-white">{step.title}</h3>
               </div>
               <p className="text-sm text-gray-300 leading-relaxed">

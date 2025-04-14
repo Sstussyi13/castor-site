@@ -5,14 +5,18 @@ import "keen-slider/keen-slider.min.css";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-// Используем process.env.PUBLIC_URL для корректного пути
-const images = Array.from({ length: 21 }, (_, i) => `${process.env.PUBLIC_URL}/img/${i + 1}.JPG`);
-
+// Ленивая подгрузка, оптимизация URL
+const images = Array.from({ length: 21 }, (_, i) => ({
+  src: `${process.env.PUBLIC_URL}/img/${i + 1}.JPG`,
+  alt: `Фото ${i + 1}`,
+}));
 
 export default function Gallery() {
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
+
   const [sliderRef] = useKeenSlider({
-    loop: true,
-    mode: "free-snap",
+    loop: false,
+    mode: "snap",
     slides: {
       perView: 1.1,
       spacing: 12,
@@ -27,8 +31,6 @@ export default function Gallery() {
     },
   });
 
-  const [lightboxIndex, setLightboxIndex] = useState(-1);
-
   return (
     <section className="bg-[#0f0f0f] text-white py-16 px-4 sm:py-24 sm:px-6">
       <div className="max-w-6xl mx-auto mb-10 text-center">
@@ -40,8 +42,9 @@ export default function Gallery() {
         </p>
       </div>
 
-      <div ref={sliderRef} className="keen-slider cursor-pointer">
-        {images.map((src, index) => (
+      {/* Слайдер с lazy-loading изображениями */}
+      <div ref={sliderRef} className="keen-slider">
+        {images.map(({ src, alt }, index) => (
           <div
             key={index}
             className="keen-slider__slide rounded-xl overflow-hidden"
@@ -49,18 +52,21 @@ export default function Gallery() {
           >
             <img
               src={src}
-              alt={`Gallery ${index}`}
-              className="w-full h-56 sm:h-80 md:h-96 object-cover rounded-xl"
+              alt={alt}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-56 sm:h-72 md:h-80 object-cover rounded-xl transition-transform duration-300 hover:scale-105"
             />
           </div>
         ))}
       </div>
 
+      {/* Лайтбокс со сжатыми изображениями */}
       <Lightbox
         open={lightboxIndex >= 0}
         index={lightboxIndex}
         close={() => setLightboxIndex(-1)}
-        slides={images.map((src) => ({ src }))}
+        slides={images.map((img) => ({ src: img.src }))}
       />
     </section>
   );
