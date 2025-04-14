@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -132,25 +132,7 @@ export default function Projects() {
         {/* Вертикальные видео */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {verticalVideos.map((project, index) => (
-            <div
-              key={index}
-              className="group rounded-2xl overflow-hidden"
-              data-aos="zoom-in"
-              data-aos-delay={index * 100}
-            >
-              <div className="relative w-full pb-[140%] sm:pb-[160%] md:pb-[177.78%] bg-black rounded-2xl overflow-hidden">
-                <video
-                  src={project.video}
-                  poster={project.poster || "/img/placeholder.jpg"}
-                  muted
-                  playsInline
-                  preload="metadata"
-                  controls
-                  className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
-                />
-              </div>
-              <div className="text-sm text-white text-center mt-2">{project.title}</div>
-            </div>
+            <VerticalVideoCard key={index} project={project} index={index} />
           ))}
         </div>
       </div>
@@ -198,5 +180,46 @@ export default function Projects() {
         </div>
       )}
     </section>
+  );
+}
+
+// Вспомогательный компонент для вертикальных видео
+function VerticalVideoCard({ project, index }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const handleLoaded = () => {
+        video.pause(); // Останавливаем после автозагрузки кадра
+      };
+      video.addEventListener("loadeddata", handleLoaded);
+      return () => {
+        video.removeEventListener("loadeddata", handleLoaded);
+      };
+    }
+  }, []);
+
+  return (
+    <div
+      className="group rounded-2xl overflow-hidden"
+      data-aos="zoom-in"
+      data-aos-delay={index * 100}
+    >
+      <div className="relative w-full pb-[177.78%] bg-black rounded-2xl overflow-hidden">
+        <video
+          ref={videoRef}
+          src={project.video}
+          poster={project.poster || "/img/placeholder.jpg"}
+          muted
+          playsInline
+          autoPlay
+          preload="auto"
+          controls
+          className="absolute top-0 left-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-300 rounded-2xl"
+        />
+      </div>
+      <div className="text-sm text-white text-center mt-2">{project.title}</div>
+    </div>
   );
 }
