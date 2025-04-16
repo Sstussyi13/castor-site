@@ -14,14 +14,14 @@ export default function Partner() {
           className="text-2xl sm:text-4xl font-bold text-black mb-8"
           data-aos="fade-up"
         >
-          Наши партнёры
+          Сотрудничали с
         </h2>
         <div
           className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          {/* Лого 1 */}
+          
           <a
             href="https://burkalo.ru/"
             target="_blank"
@@ -35,7 +35,7 @@ export default function Partner() {
             />
           </a>
 
-          {/* Лого 2 */}
+          
           <a
             href="https://www.metrikapro.ru/"
             target="_blank"
