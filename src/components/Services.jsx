@@ -14,6 +14,7 @@ const videos = [
   { title: "«Реклама кондитерской»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239028&hd=2&hash=24069785006b3776", type: "iframe" },
   { title: "«Ютюбная работа»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239030&hd=2&hash=1f9cedc0e9c796c5", type: "iframe" },
   { title: "«Серебрянный браслет»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239031&hd=2&hash=f0403ca1c22dab85", type: "iframe" },
+   { title: "«Таймер на 4:22»", video: "https://vkvideo.ru/video_ext.php?oid=-191796974&id=456239036&hd=2&hash=2574f051b7f25cb4", type: "iframe" },
   { title: "«Love»", video: "/videos/love.mp4", type: "video" },
   { title: "«Как повлияло творчество»", video: "/videos/Как повлияло творчество .mp4", type: "video" },
   { title: "«Что для тебя ночь?»", video: "/videos/Что для тебя ночь _ .mp4", type: "video" },
