@@ -58,10 +58,10 @@ export default function Steps() {
           Этапы нашей работы
         </h2>
 
-        {/* Светящийся круг в фоне */}
+       
         <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-br from-pink-500 via-red-500 to-purple-600 opacity-20 blur-[180px] rounded-full z-0" />
 
-        {/* Сетка карточек */}
+       
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
           {steps.map((step, index) => (
             <div
