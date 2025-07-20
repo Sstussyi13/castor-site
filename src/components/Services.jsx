@@ -19,7 +19,7 @@ const videos = [
   title: "Реклама жилого комплекса",
   video: "https://vkvideo.ru/video_ext.php?oid=-185949834&id=456239017&hash=58b01b23f98f82a6&hd=2",
   type: "iframe"
-}
+},
 
   { title: "«Love»", video: "/videos/love.mp4", type: "video" },
   { title: "«Как повлияло творчество»", video: "/videos/Как повлияло творчество .mp4", type: "video" },
