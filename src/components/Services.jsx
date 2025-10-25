@@ -20,11 +20,13 @@ const videos = [
   video: "https://vkvideo.ru/video_ext.php?oid=-185949834&id=456239017&hash=58b01b23f98f82a6&hd=2",
   type: "iframe"
 },
+ {title: "«Естественный отбор»", video: "https://vkvideo.ru/video-191796974_456239037", type: "iframe"},
 
   { title: "«Love»", video: "/videos/love.mp4", type: "video" },
   { title: "«Как повлияло творчество»", video: "/videos/Как повлияло творчество .mp4", type: "video" },
   { title: "«Что для тебя ночь?»", video: "/videos/Что для тебя ночь _ .mp4", type: "video" },
   { title: "«Что ты чувствуешь когда творишь»", video: "/videos/Что ты чувствуешь когда творишь _ .mp4", type: "video" },
+ 
 ];
 
 export default function Projects() {
